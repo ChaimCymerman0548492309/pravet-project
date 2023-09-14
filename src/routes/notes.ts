@@ -12,6 +12,7 @@ app.get("/notes/:id",noteController.getNotesById);
 app.put("/notes/:id",noteController.updateNote);
 
 router.post("/notes", noteController.createNote);
+console.log(2);
 
 
 export default router;
