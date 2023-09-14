@@ -1,10 +1,12 @@
 import express, { NextFunction } from 'express';
 import NoteModel from './models/note';
-
+import morgan from'morgan';
 
 const app = express();
 
+app.use(express.json());
 
+app.use(morgan('dev'));
 
 app.get("/", async (req, res) => {
 

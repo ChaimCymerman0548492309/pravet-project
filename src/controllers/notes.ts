@@ -9,6 +9,15 @@ export const getNotes: RequestHandler = async (req, res , next) => {
  next();
 }
 ;
+export const getNotesById: RequestHandler = async (req, res , next) => {
+    const noteId = req.params.noteId;
+    try {
+ const notes = await NoteModel.findById(noteId).exec();
+ res.status(200).json(notes);}
+ catch (error) {next(error);}
+ next();
+}
+;
 
 
 export const createNote: RequestHandler = async (req, res, next) => {
@@ -23,3 +32,36 @@ export const createNote: RequestHandler = async (req, res, next) => {
     catch {
         res.status(400).json({message: "Bad request"});
     }}
+
+interface updateNoteParams {
+    noteId : string
+}
+interface updateNoteBody {
+    titel? : string
+    text? : string
+}
+
+
+export const updateNote: RequestHandler = async (req, res, next) => {
+    const noteId = req.params.noteId
+    const newTitel = req.body.titel;
+    const newText = req.body.text;
+    try {
+        const updatedNote = await NoteModel.findByIdAndUpdate(noteId, {
+            titel: newTitel,
+            text: newText
+        }, {new: true});
+        res.status(200).json(updatedNote);
+            
+    }
+
+    catch {
+        res.status(400).json({message: "Bad request"});
+    }}
+
+
+
+
+
+
+

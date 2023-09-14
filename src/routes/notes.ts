@@ -7,6 +7,10 @@ const router = express.Router();
 
 app.get("/notes",noteController.getNotes);
 
+app.get("/notes/:id",noteController.getNotesById);
+
+app.put("/notes/:id",noteController.updateNote);
+
 router.post("/notes", noteController.createNote);
 
 
