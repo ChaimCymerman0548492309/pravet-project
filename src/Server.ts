@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import app from './app';
 
 
 async function connectDB() {
@@ -16,7 +17,7 @@ connectDB()
 
 const port = 8200
 
-const app = express();
+// const app = express();
 
 app.use(express.json());
 
