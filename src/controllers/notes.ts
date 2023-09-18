@@ -18,28 +18,27 @@ export const getNotesById: RequestHandler = async (req, res , next) => {
  next();
 }
 
-export const deleteNote : RequestHandler = async (req , res , next) => {
-    const noteId = req.params.noteId
-    try {
-        const deleteNote1 = await NoteModel.findByIdAndDelete(noteId).exec();
-        res.status(200).json(deleteNote1);}
-        catch (error) {next(error);}
-        next();
-       
-    }
-    
+interface createNoteeBody {
+    titel? : string
+    text? : string
+}
 
 
-export const createNote: RequestHandler = async (req, res, next) => {
+
+export const createNote: RequestHandler<unknown , unknown , createNoteeBody ,unknown> = async (req, res, next) => {
     const titel = req.body.titel;
     const text = req.body.text;
     try {
+        if(!titel){
+            throw ('eror no titel')
+        }
         const newNote = await NoteModel.create({
             titel: titel ,
              text : text ,
             });
+            res.status(201).json(newNote);
     }
-    catch {
+    catch(error) {
         res.status(400).json({message: "Bad request"});
     }}
 
@@ -71,7 +70,16 @@ export const updateNote: RequestHandler = async (req, res, next) => {
 
 
 
-
+    export const deleteNote : RequestHandler = async (req , res , next) => {
+        const noteId = req.params.noteId
+        try {
+            const deleteNote1 = await NoteModel.findByIdAndDelete(noteId).exec();
+            res.status(200).json(deleteNote1);}
+            catch (error) {next(error);}
+            next();
+           
+        }
+    
 
 
 
