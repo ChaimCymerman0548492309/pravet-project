@@ -5,13 +5,16 @@ import * as noteController from "../controllers/notes";
 
 const router = express.Router();
 
-app.get("/notes",noteController.getNotes);
+router.get("/notes",noteController.getNotes);
 
-app.get("/notes/:id",noteController.getNotesById);
+router.get("/notes/:id",noteController.getNotesById);
 
-app.put("/notes/:id",noteController.updateNote);
+router.put("/notes/:id",noteController.updateNote);
 
 router.post("/notes", noteController.createNote);
+
+router.delete("/notes/:id",noteController.deleteNote);
+
 console.log(2);
 
 
